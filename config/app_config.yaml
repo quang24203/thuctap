@@ -1,0 +1,174 @@
+# Smart Parking System Configuration
+# Cấu hình hệ thống giám sát bãi đỗ xe thông minh
+
+# Application Settings
+app:
+  name: "Smart Parking System"
+  version: "1.0.0"
+  debug: true
+  host: "0.0.0.0"
+  port: 5000
+  secret_key: "your-secret-key-here"
+
+# Camera Configuration
+cameras:
+  - id: "cam_01"
+    name: "Entrance Camera"
+    rtsp_url: "rtsp://admin:password@192.168.1.100:554/stream1"
+    position: "entrance"
+    resolution: [1920, 1080]
+    fps: 30
+    enabled: true
+    zone_type: "entrance"
+    
+  - id: "cam_02"
+    name: "Exit Camera"
+    rtsp_url: "rtsp://admin:password@192.168.1.101:554/stream1"
+    position: "exit"
+    resolution: [1920, 1080]
+    fps: 30
+    enabled: true
+    zone_type: "exit"
+    
+  - id: "cam_03"
+    name: "Parking Zone A"
+    rtsp_url: "rtsp://admin:password@192.168.1.102:554/stream1"
+    position: "parking_zone_a"
+    resolution: [1280, 720]
+    fps: 15
+    enabled: true
+    zone_type: "parking"
+    
+  - id: "cam_04"
+    name: "Parking Zone B"
+    rtsp_url: "rtsp://admin:password@192.168.1.103:554/stream1"
+    position: "parking_zone_b"
+    resolution: [1280, 720]
+    fps: 15
+    enabled: true
+    zone_type: "parking"
+
+# Parking Lot Configuration
+parking:
+  total_slots: 300
+  zones:
+    - name: "Zone A"
+      id: "zone_a"
+      slots: 100
+      coordinates: [[100, 100], [500, 400]]
+      camera_id: "cam_03"
+      
+    - name: "Zone B"
+      id: "zone_b"
+      slots: 150
+      coordinates: [[600, 100], [1200, 600]]
+      camera_id: "cam_04"
+      
+    - name: "Zone C"
+      id: "zone_c"
+      slots: 50
+      coordinates: [[100, 500], [500, 800]]
+      camera_id: "cam_03"
+
+# Model Configuration
+models:
+  # Vehicle Detection Model
+  vehicle_detection:
+    model_path: "data/models/vehicle_yolov8.pt"
+    confidence_threshold: 0.5
+    iou_threshold: 0.4
+    input_size: [640, 640]
+    classes: ["car", "truck", "bus", "motorcycle"]
+    device: "cuda"  # or "cpu"
+    
+  # License Plate Detection & Recognition
+  license_plate:
+    detection_model: "data/models/license_plate_yolov8.pt"
+    ocr_engine: "paddleocr"  # "paddleocr" or "easyocr"
+    languages: ["vi", "en"]
+    confidence_threshold: 0.7
+    device: "cuda"
+    
+  # Multi-Object Tracking
+  tracking:
+    algorithm: "bytetrack"
+    track_thresh: 0.5
+    track_buffer: 30
+    match_thresh: 0.8
+    frame_rate: 30
+    max_disappeared: 30
+    max_distance: 100
+
+# Database Configuration
+database:
+  type: "sqlite"  # "sqlite", "postgresql", "mysql"
+  # SQLite
+  database: "data/parking_system.db"
+  
+  # PostgreSQL (uncomment if using)
+  # host: "localhost"
+  # port: 5432
+  # username: "postgres"
+  # password: "password"
+  # database: "parking_system"
+  
+  # Connection pool
+  pool_size: 10
+  max_overflow: 20
+  pool_timeout: 30
+
+# Logging Configuration
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "logs/app.log"
+  max_bytes: 10485760  # 10MB
+  backup_count: 5
+
+# Performance Settings
+performance:
+  # Processing
+  batch_size: 1
+  num_workers: 4
+  gpu_memory_fraction: 0.8
+  
+  # Real-time processing
+  target_fps: 15
+  max_queue_size: 100
+  processing_timeout: 5.0
+  
+  # Web interface
+  socketio_async_mode: "threading"
+  max_connections: 100
+
+# API Configuration
+api:
+  prefix: "/api/v1"
+  cors_origins: ["*"]
+  rate_limit: "100/minute"
+  
+# Web Interface
+web:
+  template_folder: "src/web/templates"
+  static_folder: "src/web/static"
+  upload_folder: "data/uploads"
+  max_content_length: 16777216  # 16MB
+
+# Alerts and Notifications
+alerts:
+  enable_email: false
+  email_smtp_server: "smtp.gmail.com"
+  email_smtp_port: 587
+  email_username: "your-email@gmail.com"
+  email_password: "your-app-password"
+  
+  enable_webhook: false
+  webhook_url: "https://your-webhook-url.com"
+
+# Development Settings
+development:
+  auto_reload: true
+  debug_toolbar: true
+  profiler: false
+  mock_cameras: true  # Use video files instead of RTSP
+  mock_video_path: "data/raw/sample_videos/"

@@ -1,0 +1,10 @@
+# License Plate Detection Dataset
+
+path: C:\Users\admin\Dropbox\PC\Desktop\thuctaptotnghiep\data\raw\license_plate_dataset
+train: images
+val: images
+
+nc: 1
+names: ['license_plate']
+
+description: "Demo dataset for Vietnamese license plate detection"

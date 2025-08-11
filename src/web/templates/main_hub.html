@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🚗 Hệ thống Bãi đỗ xe Thông minh - Trang chủ</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        .hub-container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            margin: 2rem auto;
+            max-width: 1200px;
+        }
+        .feature-card {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 1rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            display: block;
+            height: 100%;
+        }
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            color: white;
+            text-decoration: none;
+        }
+        .feature-card.video {
+            background: linear-gradient(135deg, #007bff, #6610f2);
+        }
+        .feature-card.license-plate {
+            background: linear-gradient(135deg, #fd7e14, #e83e8c);
+        }
+        .feature-card.dashboard {
+            background: linear-gradient(135deg, #6f42c1, #e83e8c);
+        }
+        .feature-card.parking {
+            background: linear-gradient(135deg, #17a2b8, #28a745);
+        }
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+        .feature-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        .feature-description {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+        .feature-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: auto;
+        }
+        .stat-item {
+            text-align: center;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+            padding: 0.5rem;
+            flex: 1;
+            margin: 0 0.25rem;
+        }
+        .hero-section {
+            text-align: center;
+            padding: 3rem 0;
+        }
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            margin-bottom: 1rem;
+        }
+        .hero-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem;
+        }
+        .status-badge {
+            background: #28a745;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin: 0.25rem;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <h1 class="hero-title">
+                <i class="fas fa-robot"></i> Hệ thống Bãi đỗ xe Thông minh
+            </h1>
+            <p class="hero-subtitle">
+                Quản lý bãi đỗ xe hiện đại với trí tuệ nhân tạo
+            </p>
+            <div>
+                <span class="status-badge">
+                    <i class="fas fa-check-circle"></i> Mô hình YOLOv8 sẵn sàng
+                </span>
+                <span class="status-badge">
+                    <i class="fas fa-server"></i> Máy chủ API hoạt động
+                </span>
+                <span class="status-badge">
+                    <i class="fas fa-brain"></i> AI phát hiện đang hoạt động
+                </span>
+            </div>
+        </div>
+
+        <div class="hub-container p-5">
+            <h1 class="mb-4 text-center">Hệ thống Bãi đỗ xe Thông minh</h1>
+            <p class="lead text-center mb-5">Giám sát bãi đỗ xe bằng AI, nhận diện biển số xe Việt Nam, phân tích thời gian thực.</p>
+                <!-- AI Test Hub - Featured Section -->
+                <div class="col-md-12 mb-4">
+                    <a href="/test-hub" class="feature-card" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <div class="feature-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="feature-title">🤖 AI Test Hub - Trung tâm Test AI Models</div>
+                        <div class="feature-description">
+                            <strong>🎯 Hub chính để test tất cả AI models:</strong>
+                            <br>• 📷 Upload ảnh: Test phát hiện ô đỗ xe + biển số xe
+                            <br>• 🎬 Upload video: Phân tích toàn bộ timeline + tracking
+                            <br>• 🔬 Tích hợp trong Dashboard: Không cần chuyển trang
+                            <br>• ⚡ Kết quả instant với visual feedback
+                        </div>
+                        <div class="feature-stats">
+                            <div class="stat-item">
+                                <div><strong>All-in-One</strong></div>
+                                <div>AI Testing</div>
+                            </div>
+                            <div class="stat-item">
+                                <div><strong>Upload & Test</strong></div>
+                                <div>Instant Results</div>
+                            </div>
+                            <div class="stat-item">
+                                <div><strong>Dashboard</strong></div>
+                                <div>Integrated</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-12 mb-4">
+                    <a href="/universal-analysis" class="feature-card" style="background: linear-gradient(135deg, #ff6b6b, #4ecdc4);">
+                        <div class="feature-icon">
+                            <i class="fas fa-magic"></i>
+                        </div>
+                        <div class="feature-title">🎬📷 Phân tích Đa phương tiện Tổng hợp</div>
+                        <div class="feature-description">
+                            <strong>Giao diện tích hợp cho cả ảnh và video:</strong>
+                            <br>• 📷 Phân tích ảnh: Phát hiện ô đỗ xe + biển số xe
+                            <br>• 🎬 Phân tích video: Timeline ra vào + thống kê thời gian thực
+                            <br>• 🔄 Chuyển đổi linh hoạt giữa 2 chế độ
+                            <br>• 🎯 Một giao diện - đầy đủ tính năng
+                        </div>
+                        <div class="feature-stats">
+                            <div class="stat-item">
+                                <div><strong>2 trong 1</strong></div>
+                                <div>Giao diện</div>
+                            </div>
+                            <div class="stat-item">
+                                <div><strong>Thông minh</strong></div>
+                                <div>Tự nhận diện</div>
+                            </div>
+                            <div class="stat-item">
+                                <div><strong>Đầy đủ</strong></div>
+                                <div>Tính năng</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 mb-4">
+                    <a href="/live-stream" class="feature-card" style="background: linear-gradient(135deg, #dc3545, #fd7e14);">
+                        <div class="feature-icon">
+                            <i class="fas fa-broadcast-tower"></i>
+                        </div>
+                        <div class="feature-title">📹 Live Stream Analysis</div>
+                        <div class="feature-description">
+                            Phân tích video trực tiếp real-time:
+                            <br>• 📷 Webcam, IP Camera, RTSP
+                            <br>• 🔴 Live streaming với AI analysis
+                            <br>• ⚡ Real-time detection và timeline
+                            <br>• 📊 Live stats và monitoring
+                        </div>
+                        <div class="feature-stats">
+                            <div class="stat-item">
+                                <div><strong>Live</strong></div>
+                                <div>Real-time</div>
+                            </div>
+                            <div class="stat-item">
+                                <div><strong>Multi</strong></div>
+                                <div>Sources</div>
+                            </div>
+                            <div class="stat-item">
+                                <div><strong>AI</strong></div>
+                                <div>Analysis</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <a href="/video-analysis" class="feature-card video">
+                        <div class="feature-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <div class="feature-title">🎬 Video Analysis Hub</div>
+                        <div class="feature-description">
+                            Phân tích video bãi đỗ xe toàn diện:
+                            <br>• Theo dõi ô trống/có xe theo thời gian
+                            <br>• Nhận diện biển số xe tự động
+                            <br>• Timeline ra vào chi tiết
+                        </div>
+                        <div class="feature-stats">
+                            <div class="stat-item">
+                                <div><strong>Real-time</strong></div>
+                                <div>Processing</div>
+                            </div>
+                            <div class="stat-item">
+                                <div><strong>Multi-AI</strong></div>
+                                <div>Detection</div>
+                            </div>
+                            <div class="stat-item">
+                                <div><strong>Timeline</strong></div>
+                                <div>Tracking</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <a href="/license-plate-demo" class="feature-card license-plate">
+                        <div class="feature-icon">
+                            <i class="fas fa-id-card"></i>
+                        </div>
+                        <div class="feature-title">🔢 License Plate Detection</div>
+                        <div class="feature-description">
+                            Nhận diện biển số xe Việt Nam:
+                            <br>• Model YOLOv8n custom trained
+                            <br>• Độ chính xác cao (mAP50: 28.2%)
+                            <br>• Xử lý nhanh (~500ms/ảnh)
+                        </div>
+                        <div class="feature-stats">
+                            <div class="stat-item">
+                                <div><strong>28.2%</strong></div>
+                                <div>mAP50</div>
+                            </div>
+                            <div class="stat-item">
+                                <div><strong>63.6%</strong></div>
+                                <div>Recall</div>
+                            </div>
+                            <div class="stat-item">
+                                <div><strong>500ms</strong></div>
+                                <div>Speed</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <a href="/dashboard" class="feature-card dashboard">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div class="feature-title">📊 Smart Dashboard</div>
+                        <div class="feature-description">
+                            Dashboard tổng hợp và phân tích:
+                            <br>• Thống kê real-time
+                            <br>• Tích hợp nhiều AI models
+                            <br>• Giao diện thân thiện
+                        </div>
+                        <div class="feature-stats">
+                            <div class="stat-item">
+                                <div><strong>Multi</strong></div>
+                                <div>Models</div>
+                            </div>
+                            <div class="stat-item">
+                                <div><strong>Real-time</strong></div>
+                                <div>Stats</div>
+                            </div>
+                            <div class="stat-item">
+                                <div><strong>Easy</strong></div>
+                                <div>Upload</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-md-6 mb-4">
+                    <a href="/parking" class="feature-card parking">
+                        <div class="feature-icon">
+                            <i class="fas fa-car"></i>
+                        </div>
+                        <div class="feature-title">🚗 Parking Detection</div>
+                        <div class="feature-description">
+                            Phát hiện ô đỗ xe thông minh:
+                            <br>• PKLot dataset (10,926 images)
+                            <br>• Phân loại trống/có xe
+                            <br>• Tính toán tỷ lệ lấp đầy
+                        </div>
+                        <div class="feature-stats">
+                            <div class="stat-item">
+                                <div><strong>10,926</strong></div>
+                                <div>Images</div>
+                            </div>
+                            <div class="stat-item">
+                                <div><strong>PKLot</strong></div>
+                                <div>Dataset</div>
+                            </div>
+                            <div class="stat-item">
+                                <div><strong>YOLOv8</strong></div>
+                                <div>Model</div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- System Status -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-cogs"></i> System Status</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <h6>🌐 Frontend Server</h6>
+                                    <div class="badge bg-success">Flask - Port 5000</div>
+                                    <p class="mt-2 mb-0"><small>Web interface và templates</small></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <h6>🚀 Backend API</h6>
+                                    <div class="badge bg-success">FastAPI - Port 8000</div>
+                                    <p class="mt-2 mb-0"><small>AI processing và endpoints</small></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <h6>🧠 AI Models</h6>
+                                    <div class="badge bg-success">YOLOv8n Ready</div>
+                                    <p class="mt-2 mb-0"><small>License plate detection</small></p>
+                                </div>
+                                <div class="col-md-3">
+                                    <h6>💾 Storage</h6>
+                                    <div class="badge bg-success">Local Ready</div>
+                                    <p class="mt-2 mb-0"><small>Models và results</small></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="row mt-4">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5><i class="fas fa-bolt"></i> Quick Actions</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="btn-group" role="group">
+                                <a href="/test-hub" class="btn btn-primary btn-lg">
+                                    <i class="fas fa-robot"></i> AI Test Hub
+                                </a>
+                                <a href="/video-hub" class="btn btn-info">
+                                    <i class="fas fa-video"></i> Video Hub
+                                </a>
+                                <a href="/live-stream" class="btn btn-danger">
+                                    <i class="fas fa-broadcast-tower"></i> Live Stream
+                                </a>
+                                <a href="/universal-analysis" class="btn btn-warning">
+                                    <i class="fas fa-magic"></i> Universal
+                                </a>
+                                <a href="/dashboard" class="btn btn-secondary">
+                                    <i class="fas fa-chart-bar"></i> Dashboard
+                                </a>
+                                <button class="btn btn-success" onclick="testAPI()">
+                                    <i class="fas fa-flask"></i> Test API
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        async function testAPI() {
+            try {
+                const response = await fetch('/api/v1/license-plate/info');
+                const data = await response.json();
+                
+                if (data.model_available) {
+                    alert('✅ API Test Successful!\n\nLicense Plate Model: Ready\nStatus: ' + data.status);
+                } else {
+                    alert('⚠️ API Connected but Model Not Available\n\nPlease check model files.');
+                }
+            } catch (error) {
+                alert('❌ API Test Failed\n\nError: ' + error.message);
+            }
+        }
+
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animate feature cards on load
+            const cards = document.querySelectorAll('.feature-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                
+                setTimeout(() => {
+                    card.style.transition = 'all 0.5s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 200);
+            });
+        });
+    </script>
+</body>
+</html>

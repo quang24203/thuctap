@@ -1,0 +1,21 @@
+# PKLot Vehicle Detection Dataset Configuration
+
+# Dataset paths (absolute path)
+path: C:\Users\admin\Dropbox\PC\Desktop\thuctaptotnghiep\data\raw\vehicle_dataset
+train: train/images  # Train images (relative to 'path')
+val: valid/images    # Validation images (relative to 'path')
+test: test/images    # Test images (optional)
+
+# Classes for PKLot dataset (parking spaces)
+nc: 2  # Number of classes for PKLot
+names: ['empty', 'occupied']  # PKLot classes: empty parking space, occupied parking space
+
+# Dataset info
+description: "PKLot parking space detection dataset"
+version: "2.0"
+license: "PKLot Dataset"
+url: "https://web.inf.ufpr.br/vri/databases/parking-lot-database/"
+
+# Training parameters
+train_split: 0.8  # 80% for training
+val_split: 0.2    # 20% for validation

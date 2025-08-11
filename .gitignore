@@ -1,0 +1,23 @@
+# Bỏ qua thư mục môi trường ảo
+venv/
+env/
+ENV/
+.VENV/
+.Venv/
+.venv/
+# Bỏ qua các file cài đặt IDE
+*.vscode/
+*.idea/
+
+# Bỏ qua file biên dịch
+__pycache__/
+*.py[cod]
+*.pyo
+
+# Bỏ qua file log hoặc tạm thời
+*.log
+*.tmp
+
+# Bỏ các file hệ thống
+.DS_Store
+Thumbs.db

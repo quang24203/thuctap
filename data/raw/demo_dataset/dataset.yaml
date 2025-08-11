@@ -1,0 +1,10 @@
+# Demo Vehicle Detection Dataset
+
+path: C:\Users\admin\Dropbox\PC\Desktop\thuctaptotnghiep\data\raw\demo_dataset
+train: images
+val: images
+
+nc: 4
+names: ['car', 'truck', 'bus', 'motorcycle']
+
+description: "Demo dataset for vehicle detection training"

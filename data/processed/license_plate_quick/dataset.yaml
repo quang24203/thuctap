@@ -1,0 +1,6 @@
+names:
+- license_plate
+nc: 1
+path: C:\Users\admin\Dropbox\PC\Desktop\thuctaptotnghiep\data\processed\license_plate_quick
+train: train/images
+val: val/images

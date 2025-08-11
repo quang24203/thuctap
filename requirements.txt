@@ -1,0 +1,9 @@
+fastapi==0.104.1
+uvicorn==0.24.0
+python-multipart==0.0.6
+opencv-python==4.6.0.66
+numpy
+Pillow==10.0.1
+ultralytics==8.0.196
+paddlepaddle==2.5.1
+paddleocr==2.7.0.3

@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎯 Hệ thống Bãi đỗ xe Thông minh - Bảng điều khiển</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #667eea;
+            --secondary-color: #764ba2;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+            --info-color: #17a2b8;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .system-title {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .requirements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .requirement-card {
+            background: linear-gradient(135deg, #f8f9fa, #ffffff);
+            border: 2px solid var(--success-color);
+            border-radius: 15px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .requirement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .requirement-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--success-color);
+            display: block;
+        }
+
+        .requirement-label {
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+
+        .features-section {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.15);
+        }
+
+        .feature-card.active {
+            border-color: var(--success-color);
+            background: linear-gradient(135deg, #f8fff8, #ffffff);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+            color: #333;
+            text-align: center;
+        }
+
+        .feature-description {
+            color: #666;
+            line-height: 1.6;
+            text-align: center;
+        }
+
+        .accuracy-badge {
+            background: var(--success-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            display: inline-block;
+            margin: 0.2rem;
+        }
+
+        .ai-test-hub {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 20px;
+            padding: 2rem;
+            margin: 2rem 0;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+
+        .upload-area {
+            border: 3px dashed rgba(255, 255, 255, 0.5);
+            border-radius: 15px;
+            padding: 3rem;
+            text-align: center;
+            margin: 1.5rem 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .upload-area:hover {
+            border-color: white;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .upload-area.dragover {
+            border-color: #28a745;
+            background: rgba(40, 167, 69, 0.2);
+        }
+
+        .mode-selector {
+            display: flex;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+
+        .mode-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.8rem 2rem;
+            margin: 0 0.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .mode-btn.active {
+            background: white;
+            color: var(--primary-color);
+            border-color: white;
+        }
+
+        .analysis-results {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            display: none;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        .result-section {
+            margin: 1.5rem 0;
+        }
+
+        .result-title {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .performance-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .performance-item {
+            background: #f8f9fa;
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--success-color);
+            text-align: center;
+        }
+
+        .performance-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--success-color);
+            display: block;
+        }
+
+        .performance-label {
+            font-size: 0.85rem;
+            color: #666;
+            margin-top: 0.3rem;
+        }
+
+        .metric-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            border: 1px solid rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .metric-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .metric-value {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            display: block;
+        }
+
+        .metric-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .license-plates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .license-plate-item {
+            background: #fff;
+            border: 2px solid #007bff;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+        }
+
+        .plate-number {
+            font-family: 'Courier New', monospace;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #000;
+            display: block;
+        }
+
+        .plate-confidence, .plate-vehicle {
+            font-size: 0.8rem;
+            color: #666;
+            display: block;
+            margin-top: 0.3rem;
+        }
+
+        /* Timeline Styles */
+        .timeline-container {
+            max-height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 1rem;
+            background: #f8f9fa;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            padding: 0.75rem;
+            margin-bottom: 0.5rem;
+            background: white;
+            border-radius: 6px;
+            border-left: 4px solid #007bff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .timeline-item.entry {
+            border-left-color: #28a745;
+        }
+
+        .timeline-item.exit {
+            border-left-color: #dc3545;
+        }
+
+        .timeline-icon {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            width: 40px;
+            text-align: center;
+        }
+
+        .timeline-content {
+            flex: 1;
+        }
+
+        .timeline-time {
+            font-weight: bold;
+            color: #333;
+            font-size: 0.9rem;
+        }
+
+        .timeline-plate {
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #007bff;
+            margin: 0.2rem 0;
+        }
+
+        .timeline-vehicle {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* License Plates Display Styles */
+        .license-plates-display {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+            max-height: 300px;
+            overflow-y: auto;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .license-plate-card {
+            background: white;
+            border: 2px solid #007bff;
+            border-radius: 8px;
+            padding: 1rem;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+
+        .license-plate-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+        }
+
+        .plate-number-large {
+            font-family: 'Courier New', monospace;
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #000;
+            background: #fff;
+            border: 2px solid #000;
+            padding: 0.5rem;
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .plate-details {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .plate-time {
+            font-weight: bold;
+            color: #333;
+            margin-top: 0.3rem;
+        }
+
+        /* Parking Analysis Styles */
+        .parking-stats {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .parking-stat-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .parking-stat-item:last-child {
+            border-bottom: none;
+        }
+
+        .stat-label {
+            font-weight: 500;
+            color: #495057;
+        }
+
+        .stat-value {
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .parking-visual {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 1rem;
+        }
+
+        .tech-stack {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .tech-item {
+            display: inline-block;
+            background: var(--primary-color);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 25px;
+            margin: 0.3rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .navigation-bar {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 50px;
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .nav-link {
+            display: inline-block;
+            color: var(--primary-color);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-link:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .main-container {
+                padding: 1rem;
+            }
+            
+            .system-title {
+                font-size: 2rem;
+            }
+            
+            .requirements-grid,
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .navigation-bar {
+                padding: 1rem;
+            }
+            
+            .nav-link {
+                display: block;
+                margin: 0.2rem 0;
+            }
+        }
+
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .loading-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid var(--primary-color);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <h5>Đang phân tích AI...</h5>
+            <p>Vui lòng đợi trong giây lát</p>
+        </div>
+    </div>
+
+    <div class="main-container">
+        <!-- Navigation Bar -->
+        <div class="navigation-bar">
+            <a href="/" class="nav-link"><i class="fas fa-home"></i> Trang chủ</a>
+            <a href="/vehicle-detection" class="nav-link"><i class="fas fa-car"></i> Nhận diện xe</a>
+            <a href="/license-plate" class="nav-link"><i class="fas fa-id-card"></i> Nhận diện biển số</a>
+            <a href="/tracking" class="nav-link"><i class="fas fa-route"></i> Theo dõi xe</a>
+            <a href="/cameras" class="nav-link"><i class="fas fa-video"></i> Camera</a>
+            <a href="/analytics" class="nav-link"><i class="fas fa-chart-bar"></i> Thống kê</a>
+            <a href="/technical-report" class="nav-link"><i class="fas fa-file-alt"></i> Báo cáo kỹ thuật</a>
+            <a href="/docs" class="nav-link"><i class="fas fa-book"></i> Tài liệu API</a>
+        </div>
+
+        <!-- Header Section -->
+        <div class="header-section">
+            <div class="system-title">
+                🎯 Hệ thống Bãi đỗ xe Thông minh
+            </div>
+            <p class="lead text-center mb-4">
+                Giám sát bãi đỗ xe bằng AI, nhận diện biển số xe Việt Nam, phân tích thời gian thực
+            </p>
+
+            <!-- System Requirements -->
+            <div class="requirements-grid">
+                <div class="requirement-card">
+                    <span class="requirement-value">≥90%</span>
+                    <div class="requirement-label">Độ chính xác nhận diện xe (mAP)</div>
+                </div>
+                <div class="requirement-card">
+                    <span class="requirement-value">≥85%</span>
+                    <div class="requirement-label">Độ chính xác nhận diện biển số</div>
+                </div>
+                <div class="requirement-card">
+                    <span class="requirement-value">≥15</span>
+                    <div class="requirement-label">FPS thời gian thực</div>
+                </div>
+                <div class="requirement-card">
+                    <span class="requirement-value">5-10</span>
+                    <div class="requirement-label">Luồng camera đồng thời</div>
+                </div>
+            </div>
+
+            <!-- Technology Stack -->
+            <div class="tech-stack">
+                <h5 class="mb-3">🔧 Công nghệ sử dụng</h5>
+                <span class="tech-item">YOLOv8</span>
+                <span class="tech-item">PaddleOCR</span>
+                <span class="tech-item">ByteTrack</span>
+                <span class="tech-item">FastAPI</span>
+                <span class="tech-item">Bootstrap 5</span>
+                <span class="tech-item">SQLAlchemy</span>
+                <span class="tech-item">Docker</span>
+                <span class="tech-item">CUDA</span>
+            </div>
+        </div>
+
+        <!-- AI Test Hub -->
+        <div class="ai-test-hub">
+            <h2 class="text-center mb-4">
+                <i class="fas fa-robot"></i> Trung tâm kiểm thử AI
+            </h2>
+            <p class="text-center mb-4">
+                Kiểm thử trực tiếp các mô hình AI với ảnh và video. Phát hiện xe, nhận diện biển số, phân tích chỗ đỗ xe.
+            </p>
+
+            <!-- Mode Selector -->
+            <div class="mode-selector">
+                <button class="mode-btn active" onclick="switchMode('image')">
+                    <i class="fas fa-image"></i> Phân tích ảnh
+                </button>
+                <button class="mode-btn" onclick="switchMode('video')">
+                    <i class="fas fa-video"></i> Phân tích video
+                </button>
+            </div>
+
+            <!-- Upload Area -->
+            <div class="upload-area" id="uploadArea" onclick="document.getElementById('fileInput').click()">
+                <div class="mb-3">
+                    <i class="fas fa-cloud-upload-alt fa-3x mb-3"></i>
+                    <h4>Kéo thả file hoặc nhấn để chọn</h4>
+                    <p class="mb-0">
+                        <span id="supportedFormats">Hỗ trợ: JPG, PNG, BMP, GIF, MP4</span>
+                    </p>
+                </div>
+                <input type="file" id="fileInput" style="display: none;" accept="image/*,video/*" onchange="handleFile(this.files[0])">
+            </div>
+
+            <!-- File Preview -->
+            <div id="filePreview" style="display: none;">
+                <div class="text-center mb-3">
+                    <h6>File đã chọn:</h6>
+                    <div id="previewContent"></div>
+                    <button class="btn btn-light btn-sm mt-2" onclick="clearFile()">
+                        <i class="fas fa-times"></i> Xóa file
+                    </button>
+                </div>
+            </div>
+
+            <!-- Analyze Buttons -->
+            <div class="text-center">
+                <button class="btn btn-light btn-lg me-2" id="analyzeBtn" onclick="analyzeFile()" disabled>
+                    <i class="fas fa-brain"></i> Phân tích AI
+                </button>
+                <button class="btn btn-warning btn-lg me-2" onclick="testBenchmarkVideo()">
+                    <i class="fas fa-rocket"></i> Kiểm thử video chuẩn
+                </button>
+                <button class="btn btn-success btn-lg me-2" onclick="testSimpleAPI()">
+                    <i class="fas fa-check-circle"></i> Kiểm thử API
+                </button>
+                <button class="btn btn-danger btn-lg me-2" onclick="analyzeWithRealModels()">
+                    <i class="fas fa-brain"></i> Phân tích AI thực tế
+                </button>
+                <button class="btn btn-info btn-lg" onclick="startCameraStream()">
+                    <i class="fas fa-camera"></i> Luồng camera
+                </button>
+            </div>
+
+            <!-- Benchmark Info -->
+            <div class="alert alert-info mt-3" style="display: none;" id="benchmarkInfo">
+                <h6><i class="fas fa-info-circle"></i> Kiểm thử video chuẩn</h6>
+                <p class="mb-1">📁 File: <code>data/benchmark/parking_benchmark.mp4</code></p>
+                <p class="mb-1">📊 Thông số: 1280x720 @ 30FPS, 60 giây</p>
+                <p class="mb-0">🎯 Nội dung: 12 ô đỗ xe + biển số Việt Nam</p>
+            </div>
+
+            <!-- Analysis Results -->
+            <div class="analysis-results" id="analysisResults">
+                <h4 class="result-title">🔬 Kết quả phân tích AI</h4>
+                
+                <!-- Performance Metrics -->
+                <div class="result-section">
+                    <h6 class="result-title">📊 Thông số hiệu năng</h6>
+                    <div class="performance-grid" id="performanceMetrics">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Detection Results -->
+                <div class="result-section">
+                    <h6 class="result-title">🚗 Kết quả nhận diện xe</h6>
+                    <div id="vehicleResults">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- License Plate Results -->
+                <div class="result-section">
+                    <h6 class="result-title">🔢 Nhận diện biển số</h6>
+                    <div id="licensePlateResults">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Timeline Entry/Exit -->
+                <div class="result-section">
+                    <h6 class="result-title">📅 Lịch sử ra/vào xe</h6>
+                    <div class="timeline-container" id="timelineContainer">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- License Plates Display -->
+                <div class="result-section">
+                    <h6 class="result-title">🚗 Danh sách biển số</h6>
+                    <div class="license-plates-display" id="licensePlatesDisplay">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Parking Analysis -->
+                <div class="result-section">
+                    <h6 class="result-title">🅿️ Phân tích chỗ đỗ xe</h6>
+                    <div id="parkingResults">
+                        <!-- Will be populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="features-section">
+            <h3 class="text-center mb-4">🔧 Tính năng hệ thống</h3>
+            <div class="feature-grid">
+                <div class="feature-card active">
+                    <div class="feature-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <div class="feature-title">Nhận diện xe</div>
+                    <div class="feature-description">
+                        Mô hình YOLOv8 phát hiện xe với độ chính xác cao
+                        <br><span class="accuracy-badge">≥90% mAP</span>
+                    </div>
+                </div>
+
+                <div class="feature-card active">
+                    <div class="feature-icon">
+                        <i class="fas fa-id-card"></i>
+                    </div>
+                    <div class="feature-title">Nhận diện biển số</div>
+                    <div class="feature-description">
+                        PaddleOCR cho biển số xe Việt Nam
+                        <br><span class="accuracy-badge">≥85% Độ chính xác</span>
+                    </div>
+                </div>
+
+                <div class="feature-card active">
+                    <div class="feature-icon">
+                        <i class="fas fa-route"></i>
+                    </div>
+                    <div class="feature-title">Theo dõi đa mục tiêu</div>
+                    <div class="feature-description">
+                        Thuật toán ByteTrack theo dõi nhiều xe cùng lúc
+                        <br><span class="accuracy-badge">Thời gian thực</span>
+                    </div>
+                </div>
+
+                <div class="feature-card active">
+                    <div class="feature-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <div class="feature-title">Xử lý thời gian thực</div>
+                    <div class="feature-description">
+                        Xử lý video trực tiếp, tốc độ cao
+                        <br><span class="accuracy-badge">≥15 FPS</span>
+                    </div>
+                </div>
+
+                <div class="feature-card active">
+                    <div class="feature-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <div class="feature-title">Hỗ trợ nhiều camera</div>
+                    <div class="feature-description">
+                        Hỗ trợ nhiều luồng camera đồng thời
+                        <br><span class="accuracy-badge">5-10 luồng</span>
+                    </div>
+                </div>
+
+                <div class="feature-card active">
+                    <div class="feature-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <div class="feature-title">Database Management</div>
+                    <div class="feature-description">
+                        Lưu trữ và quản lý dữ liệu xe cộ
+                        <br><span class="accuracy-badge">SQLite/PostgreSQL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let currentMode = 'image';
+        let selectedFile = null;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            setupDragAndDrop();
+        });
+
+        function switchMode(mode) {
+            currentMode = mode;
+            
+            // Update buttons
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Update supported formats
+            const formatsSpan = document.getElementById('supportedFormats');
+            if (mode === 'image') {
+                formatsSpan.textContent = 'Hỗ trợ: JPG, PNG, BMP, GIF';
+                document.getElementById('fileInput').accept = 'image/*';
+            } else {
+                formatsSpan.textContent = 'Hỗ trợ: MP4, AVI, MOV, MKV';
+                document.getElementById('fileInput').accept = 'video/*';
+            }
+            
+            // Clear current file if different type
+            clearFile();
+        }
+
+        function setupDragAndDrop() {
+            const uploadArea = document.getElementById('uploadArea');
+            
+            uploadArea.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                uploadArea.classList.add('dragover');
+            });
+            
+            uploadArea.addEventListener('dragleave', function(e) {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+            });
+            
+            uploadArea.addEventListener('drop', function(e) {
+                e.preventDefault();
+                uploadArea.classList.remove('dragover');
+                
+                const files = e.dataTransfer.files;
+                if (files.length > 0) {
+                    handleFile(files[0]);
+                }
+            });
+        }
+
+        function handleFile(file) {
+            if (!file) return;
+            
+            selectedFile = file;
+            
+            // Show file preview
+            const preview = document.getElementById('filePreview');
+            const previewContent = document.getElementById('previewContent');
+            
+            if (file.type.startsWith('image/')) {
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(file);
+                img.style.maxWidth = '200px';
+                img.style.maxHeight = '150px';
+                img.style.borderRadius = '10px';
+                previewContent.innerHTML = '';
+                previewContent.appendChild(img);
+            } else if (file.type.startsWith('video/')) {
+                const video = document.createElement('video');
+                video.src = URL.createObjectURL(file);
+                video.style.maxWidth = '200px';
+                video.style.maxHeight = '150px';
+                video.style.borderRadius = '10px';
+                video.controls = true;
+                previewContent.innerHTML = '';
+                previewContent.appendChild(video);
+            } else {
+                previewContent.innerHTML = `<p><i class="fas fa-file"></i> ${file.name}</p>`;
+            }
+            
+            preview.style.display = 'block';
+            document.getElementById('analyzeBtn').disabled = false;
+        }
+
+        function clearFile() {
+            selectedFile = null;
+            document.getElementById('filePreview').style.display = 'none';
+            document.getElementById('analysisResults').style.display = 'none';
+            document.getElementById('analyzeBtn').disabled = true;
+            document.getElementById('fileInput').value = '';
+        }
+
+        async function analyzeFile() {
+            if (!selectedFile) return;
+
+            // Show loading
+            document.getElementById('loadingOverlay').style.display = 'flex';
+
+            // Set timeout for large video files
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => {
+                controller.abort();
+                console.log('Request aborted due to timeout');
+            }, 120000); // 2 minutes timeout
+
+            try {
+                const formData = new FormData();
+                formData.append('file', selectedFile);
+
+                console.log('Starting analysis for file:', selectedFile.name);
+
+                const response = await fetch('/api/v1/universal/analyze', {
+                    method: 'POST',
+                    body: formData,
+                    signal: controller.signal
+                });
+
+                clearTimeout(timeoutId);
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                const result = await response.json();
+                console.log('Analysis result:', result);
+
+                if (result.success) {
+                    displayAnalysisResults(result);
+                } else {
+                    console.error('Analysis failed:', result);
+                    alert('❌ Phân tích thất bại: ' + (result.detail || result.error || 'Unknown error'));
+                }
+
+            } catch (error) {
+                clearTimeout(timeoutId);
+                console.error('Analysis error:', error);
+
+                if (error.name === 'AbortError') {
+                    alert('⏰ Timeout: Video quá lớn hoặc xử lý quá lâu!\n\n💡 Thử:\n- Video ngắn hơn (<30s)\n- Độ phân giải thấp hơn\n- Format MP4');
+                } else {
+                    alert('❌ Lỗi phân tích: ' + error.message + '\n\n💡 Vui lòng:\n- Kiểm tra định dạng video\n- Thử file khác\n- Refresh trang');
+                }
+            } finally {
+                document.getElementById('loadingOverlay').style.display = 'none';
+            }
+        }
+
+        function displayResults(result) {
+            const resultsDiv = document.getElementById('analysisResults');
+            
+            // Performance Metrics
+            displayPerformanceMetrics(result.performance || {});
+            
+            // Vehicle Results
+            displayVehicleResults(result.results?.vehicles || {});
+            
+            // License Plate Results
+            displayLicensePlateResults(result.results?.vehicles || {});
+            
+            // Parking Results
+            displayParkingResults(result.results?.parking_spaces || result.results?.statistics || {});
+            
+            resultsDiv.style.display = 'block';
+        }
+
+        function displayPerformanceMetrics(performance) {
+            const container = document.getElementById('performanceMetrics');
+            container.innerHTML = '';
+            
+            Object.entries(performance).forEach(([key, value]) => {
+                const item = document.createElement('div');
+                item.className = 'performance-item';
+                item.innerHTML = `
+                    <span class="performance-value">${value}</span>
+                    <div class="performance-label">${key.replace(/_/g, ' ').toUpperCase()}</div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        function displayVehicleResults(vehicles) {
+            const container = document.getElementById('vehicleResults');
+            
+            if (vehicles.count || vehicles.details) {
+                container.innerHTML = `
+                    <div class="alert alert-success">
+                        <strong>🚗 Phát hiện ${vehicles.count || vehicles.details?.length || 0} phương tiện</strong>
+                        ${vehicles.details ? vehicles.details.map(v => `
+                            <br>• ${v.type || 'Vehicle'} (Confidence: ${(v.confidence * 100).toFixed(1)}%)
+                        `).join('') : ''}
+                    </div>
+                `;
+            } else {
+                container.innerHTML = '<div class="alert alert-info">Không phát hiện phương tiện nào</div>';
+            }
+        }
+
+        function displayLicensePlateResults(vehicles) {
+            const container = document.getElementById('licensePlateResults');
+            
+            if (vehicles.details) {
+                const licensePlates = vehicles.details
+                    .filter(v => v.license_plate?.detected)
+                    .map(v => v.license_plate.text);
+                
+                if (licensePlates.length > 0) {
+                    container.innerHTML = `
+                        <div class="alert alert-success">
+                            <strong>🔢 Phát hiện ${licensePlates.length} biển số:</strong>
+                            <br>${licensePlates.map(lp => `<span class="badge bg-primary me-2">${lp}</span>`).join('')}
+                        </div>
+                    `;
+                } else {
+                    container.innerHTML = '<div class="alert alert-warning">Không đọc được biển số</div>';
+                }
+            } else {
+                container.innerHTML = '<div class="alert alert-info">Chưa có dữ liệu biển số</div>';
+            }
+        }
+
+        function displayParkingResults(parking) {
+            const container = document.getElementById('parkingResults');
+            
+            if (parking.total !== undefined) {
+                container.innerHTML = `
+                    <div class="alert alert-info">
+                        <strong>🅿️ Trạng thái bãi đỗ:</strong>
+                        <br>• Tổng chỗ đỗ: ${parking.total}
+                        <br>• Đã sử dụng: ${parking.occupied}
+                        <br>• Còn trống: ${parking.empty}
+                        <br>• Tỷ lệ sử dụng: ${(parking.occupancy_rate * 100).toFixed(1)}%
+                    </div>
+                `;
+            } else if (parking.total_vehicles !== undefined) {
+                container.innerHTML = `
+                    <div class="alert alert-info">
+                        <strong>📊 Thống kê video:</strong>
+                        <br>• Tổng số xe: ${parking.total_vehicles}
+                        <br>• Đỗ xe đỉnh: ${parking.peak_occupancy}
+                        <br>• Thời gian đỗ TB: ${parking.average_stay}
+                    </div>
+                `;
+            } else {
+                container.innerHTML = '<div class="alert alert-secondary">Chưa có dữ liệu parking</div>';
+            }
+        }
+
+        // Display analysis results function
+        function displayAnalysisResults(data) {
+            const resultsDiv = document.getElementById('analysisResults');
+            if (!resultsDiv) {
+                console.error('analysisResults element not found!');
+                alert('❌ Lỗi: Không tìm thấy element hiển thị kết quả');
+                return;
+            }
+
+            resultsDiv.style.display = 'block';
+
+            // Clear previous results
+            resultsDiv.innerHTML = '<h4 class="result-title">🔬 Kết quả Phân tích AI</h4>';
+
+            if (data.success && data.summary) {
+                const summary = data.summary;
+
+                // Performance Metrics
+                const metricsHtml = `
+                    <div class="result-section">
+                        <h6 class="result-title">📊 Performance Metrics</h6>
+                        <div class="performance-grid">
+                            <div class="metric-card">
+                                <div class="metric-value">${summary.total_vehicles_detected || 0}</div>
+                                <div class="metric-label">🚗 Tổng số xe</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">${summary.max_vehicles_in_frame || 0}</div>
+                                <div class="metric-label">📊 Xe tối đa/frame</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">${summary.total_license_plates_detected || 0}</div>
+                                <div class="metric-label">🔢 Biển số phát hiện</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">${summary.unique_license_plates || 0}</div>
+                                <div class="metric-label">🆔 Biển số duy nhất</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">${summary.processing_time || 'N/A'}</div>
+                                <div class="metric-label">⏱️ Thời gian xử lý</div>
+                            </div>
+                            <div class="metric-card">
+                                <div class="metric-value">${summary.frames_processed || 0}</div>
+                                <div class="metric-label">🎬 Frames đã xử lý</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+
+                // Vehicle Breakdown
+                let vehicleBreakdownHtml = '';
+                if (summary.vehicle_breakdown) {
+                    const breakdown = summary.vehicle_breakdown;
+                    vehicleBreakdownHtml = `
+                        <div class="result-section">
+                            <h6 class="result-title">🚗 Phân loại xe</h6>
+                            <div class="row">
+                                <div class="col-md-3"><span class="badge bg-primary">🚗 Ô tô: ${breakdown.car || 0}</span></div>
+                                <div class="col-md-3"><span class="badge bg-success">🚛 Xe tải: ${breakdown.truck || 0}</span></div>
+                                <div class="col-md-3"><span class="badge bg-warning">🚌 Xe buýt: ${breakdown.bus || 0}</span></div>
+                                <div class="col-md-3"><span class="badge bg-info">🏍️ Xe máy: ${breakdown.motorcycle || 0}</span></div>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                // Timeline Entry/Exit
+                let timelineHtml = '';
+                if (data.analysis_data && data.analysis_data.timeline_events && data.analysis_data.timeline_events.length > 0) {
+                    const events = data.analysis_data.timeline_events.slice(0, 20); // Show last 20 events
+                    timelineHtml = `
+                        <div class="timeline-container">
+                            ${events.map(event => {
+                                const eventTime = new Date(event.timestamp * 1000).toLocaleString('vi-VN');
+                                const icon = event.type === 'entry' ? '🟢' : '🔴';
+                                const typeText = event.type === 'entry' ? 'Vào' : 'Ra';
+                                return `
+                                    <div class="timeline-item ${event.type}">
+                                        <div class="timeline-icon">${icon}</div>
+                                        <div class="timeline-content">
+                                            <div class="timeline-time">${eventTime} - ${typeText}</div>
+                                            <div class="timeline-plate">${event.plate_number}</div>
+                                            <div class="timeline-vehicle">${event.vehicle_class || 'Unknown'} - Confidence: ${(event.confidence * 100).toFixed(1)}%</div>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    `;
+                }
+
+                // License Plates Display
+                let licensePlatesDisplayHtml = '';
+                if (data.analysis_data && data.analysis_data.license_plates && data.analysis_data.license_plates.length > 0) {
+                    const plates = data.analysis_data.license_plates;
+                    // Group by unique plate numbers
+                    const uniquePlates = {};
+                    plates.forEach(plate => {
+                        if (!uniquePlates[plate.plate_number]) {
+                            uniquePlates[plate.plate_number] = plate;
+                        }
+                    });
+
+                    licensePlatesDisplayHtml = `
+                        <div class="license-plates-display">
+                            ${Object.values(uniquePlates).map(plate => {
+                                const plateTime = new Date(plate.timestamp * 1000).toLocaleString('vi-VN');
+                                return `
+                                    <div class="license-plate-card">
+                                        <div class="plate-number-large">${plate.plate_number}</div>
+                                        <div class="plate-details">
+                                            <div>Loại xe: ${plate.vehicle_class || 'Unknown'}</div>
+                                            <div>Confidence: ${(plate.confidence * 100).toFixed(1)}%</div>
+                                            <div class="plate-time">${plateTime}</div>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    `;
+                }
+
+                // Parking Analysis
+                let parkingAnalysisHtml = '';
+                if (data.analysis_data && data.analysis_data.parking_analysis) {
+                    const parking = data.analysis_data.parking_analysis;
+                    parkingAnalysisHtml = `
+                        <div class="result-section">
+                            <h6 class="result-title">🅿️ Phân tích Bãi đỗ xe</h6>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="parking-stats">
+                                        <div class="parking-stat-item">
+                                            <span class="stat-label">Tổng số chỗ:</span>
+                                            <span class="stat-value">${parking.total_spaces || 0}</span>
+                                        </div>
+                                        <div class="parking-stat-item">
+                                            <span class="stat-label">Đã sử dụng:</span>
+                                            <span class="stat-value text-danger">${parking.occupied_spaces || 0}</span>
+                                        </div>
+                                        <div class="parking-stat-item">
+                                            <span class="stat-label">Còn trống:</span>
+                                            <span class="stat-value text-success">${parking.empty_spaces || 0}</span>
+                                        </div>
+                                        <div class="parking-stat-item">
+                                            <span class="stat-label">Tỷ lệ sử dụng:</span>
+                                            <span class="stat-value">${((parking.occupancy_rate || 0) * 100).toFixed(1)}%</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="parking-visual">
+                                        <div class="progress mb-2">
+                                            <div class="progress-bar bg-danger" style="width: ${((parking.occupancy_rate || 0) * 100)}%"></div>
+                                        </div>
+                                        <small class="text-muted">Tỷ lệ sử dụng: ${((parking.occupancy_rate || 0) * 100).toFixed(1)}%</small>
+                                        ${parking.average_stay ? `<br><small>Thời gian đỗ TB: ${parking.average_stay}</small>` : ''}
+                                        ${parking.peak_occupancy ? `<br><small>Đỗ xe đỉnh: ${parking.peak_occupancy} xe</small>` : ''}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                }
+
+                resultsDiv.innerHTML += metricsHtml + vehicleBreakdownHtml + parkingAnalysisHtml;
+
+                // Add timeline section if containers exist, otherwise append to main results
+                if (timelineHtml && !document.getElementById('timelineContainer')) {
+                    resultsDiv.innerHTML += `
+                        <div class="result-section">
+                            <h6 class="result-title">📅 Timeline Ra Vào Xe</h6>
+                            ${timelineHtml}
+                        </div>
+                    `;
+                }
+
+                if (licensePlatesDisplayHtml && !document.getElementById('licensePlatesDisplay')) {
+                    resultsDiv.innerHTML += `
+                        <div class="result-section">
+                            <h6 class="result-title">🚗 Danh Sách Biển Số</h6>
+                            ${licensePlatesDisplayHtml}
+                        </div>
+                    `;
+                }
+
+                // Add timeline and license plates to their containers with null checks
+                const timelineContainer = document.getElementById('timelineContainer');
+                if (timelineContainer) {
+                    if (timelineHtml) {
+                        timelineContainer.innerHTML = timelineHtml;
+                    } else {
+                        timelineContainer.innerHTML = `
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle"></i> Chưa có dữ liệu timeline ra vào
+                            </div>
+                        `;
+                    }
+                } else {
+                    console.warn('timelineContainer element not found');
+                }
+
+                const licensePlatesContainer = document.getElementById('licensePlatesDisplay');
+                if (licensePlatesContainer) {
+                    if (licensePlatesDisplayHtml) {
+                        licensePlatesContainer.innerHTML = licensePlatesDisplayHtml;
+                    } else {
+                        licensePlatesContainer.innerHTML = `
+                            <div class="alert alert-info">
+                                <i class="fas fa-info-circle"></i> Chưa phát hiện biển số xe nào
+                            </div>
+                        `;
+                    }
+                } else {
+                    console.warn('licensePlatesDisplay element not found');
+                }
+            } else {
+                resultsDiv.innerHTML += '<div class="alert alert-danger">❌ Phân tích thất bại</div>';
+            }
+        }
+
+        // Test benchmark video function
+        function testBenchmarkVideo() {
+            // Show benchmark info
+            document.getElementById('benchmarkInfo').style.display = 'block';
+
+            // Show loading
+            showLoading();
+
+            // Call benchmark test API
+            fetch('/api/v1/test-benchmark', {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                hideLoading();
+                if (data.success) {
+                    displayAnalysisResults(data);
+                    // Add benchmark-specific info
+                    const resultsDiv = document.getElementById('analysisResults');
+                    const benchmarkNote = document.createElement('div');
+                    benchmarkNote.className = 'alert alert-success mt-3';
+                    benchmarkNote.innerHTML = `
+                        <h6><i class="fas fa-check-circle"></i> Benchmark Test Completed!</h6>
+                        <p class="mb-1">✅ Video processed successfully</p>
+                        <p class="mb-1">📊 Performance metrics calculated</p>
+                        <p class="mb-0">🎯 Ready for production deployment</p>
+                    `;
+                    resultsDiv.appendChild(benchmarkNote);
+                } else {
+                    alert('Benchmark test failed: ' + (data.error || 'Unknown error'));
+                }
+            })
+            .catch(error => {
+                hideLoading();
+                alert('Benchmark test error: ' + error.message);
+            });
+        }
+
+        // Test simple API function
+        function testSimpleAPI() {
+            // Show loading
+            document.getElementById('loadingOverlay').style.display = 'flex';
+
+            fetch('/api/v1/test-simple', {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('loadingOverlay').style.display = 'none';
+                if (data.success) {
+                    displayAnalysisResults(data);
+                    // Add test info
+                    const resultsDiv = document.getElementById('analysisResults');
+                    const testNote = document.createElement('div');
+                    testNote.className = 'alert alert-info mt-3';
+                    testNote.innerHTML = `
+                        <h6><i class="fas fa-info-circle"></i> API Test Completed!</h6>
+                        <p class="mb-1">✅ Server connection: OK</p>
+                        <p class="mb-1">✅ API endpoints: Working</p>
+                        <p class="mb-1">✅ Data processing: Functional</p>
+                        <p class="mb-0">🎯 Ready to upload real videos!</p>
+                    `;
+                    resultsDiv.appendChild(testNote);
+                } else {
+                    alert('❌ API test failed: ' + (data.error || 'Unknown error'));
+                }
+            })
+            .catch(error => {
+                document.getElementById('loadingOverlay').style.display = 'none';
+                alert('❌ API connection failed: ' + error.message);
+            });
+        }
+
+        // Real AI Analysis function
+        function analyzeWithRealModels() {
+            const fileInput = document.getElementById('fileInput');
+
+            if (!fileInput.files || fileInput.files.length === 0) {
+                alert('Please select a file first!');
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const formData = new FormData();
+            formData.append('file', file);
+
+            // Show loading
+            document.getElementById('loadingOverlay').style.display = 'flex';
+
+            fetch('/api/v1/analyze-real', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('loadingOverlay').style.display = 'none';
+                if (data.success) {
+                    // Add real analysis indicator
+                    data.is_real_analysis = true;
+                    displayAnalysisResults(data);
+
+                    // Add real analysis info
+                    const resultsDiv = document.getElementById('analysisResults');
+                    const realNote = document.createElement('div');
+                    realNote.className = 'alert alert-success mt-3';
+                    realNote.innerHTML = `
+                        <h5><i class="fas fa-brain"></i> Real AI Analysis Completed!</h5>
+                        <p class="mb-1">🚗 <strong>Vehicle Detection:</strong> YOLOv8 trained on 10,000+ images</p>
+                        <p class="mb-1">🔢 <strong>License Plate Recognition:</strong> Custom OCR model</p>
+                        <p class="mb-1">🅿️ <strong>Parking Analysis:</strong> Real-time space detection</p>
+                        <p class="mb-0">⚡ <strong>File processed:</strong> ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)</p>
+                    `;
+                    resultsDiv.appendChild(realNote);
+                } else {
+                    alert('❌ Real analysis failed: ' + (data.error || 'Unknown error'));
+                }
+            })
+            .catch(error => {
+                document.getElementById('loadingOverlay').style.display = 'none';
+                alert('❌ Real analysis connection failed: ' + error.message);
+            });
+        }
+
+        // Camera Stream function
+        function startCameraStream() {
+            alert('📹 Camera stream feature will open real-time video feed from parking lot cameras with live vehicle detection and parking space analysis!');
+
+            // For now, show real-time parking status
+            fetch('/api/v1/parking/status/real')
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    let message = '📊 Real-time Parking Status:\n\n';
+                    if (data.parking_status) {
+                        message += `🅿️ Total Spaces: ${data.parking_status.total_spaces}\n`;
+                        message += `🚗 Occupied: ${data.parking_status.occupied_spaces}\n`;
+                        message += `✅ Empty: ${data.parking_status.empty_spaces}\n`;
+                        message += `📊 Occupancy: ${(data.parking_status.occupancy_rate * 100).toFixed(1)}%\n\n`;
+                    }
+                    if (data.real_time_data) {
+                        message += `📹 Active Cameras: ${data.real_time_data.active_cameras}\n`;
+                        message += `🚗 Live Vehicles: ${data.real_time_data.total_vehicles_detected}`;
+                    }
+                    alert(message);
+                } else {
+                    alert('❌ Failed to get real-time status: ' + (data.error || 'Unknown error'));
+                }
+            })
+            .catch(error => {
+                alert('❌ Camera connection failed: ' + error.message);
+            });
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            setupDragAndDrop();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+# Simple Configuration for Testing
+app_settings:
+  debug: true
+  secret_key: "dev-secret-key"
+
+# Database Configuration (SQLite only)
+database:
+  type: "sqlite"
+  database: "data/parking_system.db"
+  pool_size: 5
+  max_overflow: 10
+  pool_timeout: 30
+
+# Single Camera for Testing
+cameras:
+  - id: "cam_01"
+    name: "Test Camera"
+    rtsp_url: "0"  # Use webcam
+    position: "entrance"
+    resolution: [640, 480]
+    fps: 30
+    enabled: true
+    zone_type: "entrance"
+
+# Parking Configuration
+parking:
+  total_slots: 100
+  zones:
+    - name: "Zone A"
+      id: "zone_a"
+      slots: 100
+
+# Model Configuration (CPU only for testing)
+models:
+  vehicle_detection:
+    model_path: "yolov8n.pt"
+    confidence_threshold: 0.5
+    device: "cpu"
+    
+  license_plate:
+    ocr_engine: "paddleocr"
+    confidence_threshold: 0.7
+    device: "cpu"
+    
+  tracking:
+    algorithm: "simple"
+    max_disappeared: 30
+    max_distance: 100
+
+# Logging
+logging:
+  level: "INFO"
+  file: "logs/app.log"

@@ -1,0 +1,10 @@
+names:
+- car
+- truck
+- bus
+- motorcycle
+nc: 4
+path: C:\Users\admin\Dropbox\PC\Desktop\thuctaptotnghiep\data\processed\vehicle_detection
+test: test/images
+train: train/images
+val: val/images
